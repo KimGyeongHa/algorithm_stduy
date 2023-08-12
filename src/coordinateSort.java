@@ -9,77 +9,33 @@ public class coordinateSort {
 
      */
 
-    public static class coordinate{
+    public static class coordinate implements Comparable<coordinate>{
         int x,y;
 
         coordinate(int x, int y){
             this.x = x;
             this.y = y;
         }
+        // sort 정렬 메서드 재정의
+        @Override
+        public int compareTo(coordinate c) {
+            if(c.x == this.x) return this.y - c.y;
+            else return this.x - c.x;
+        }
+
     }
-
-    public List<coordinate> coordinate_sort(List<coordinate> answer_arr){
-
-        Collections.sort(answer_arr, new Comparator<coordinate>() {
-            @Override
-            public int compare(coordinate o1, coordinate o2) {
-                if(o1.y > o2.y) o2.y = o1.y;
-
-                return 0;
-            }
-        });
-
-        /*
-        1회전 후 고장
-
-        for(int i=0 ; i < answer_arr.length-1 ; i++){
-            if(answer_arr[i][0] > answer_arr[i+1][0]) {
-                for (int j = 0; j < answer_arr[i].length; j++) {
-                    int temp = answer_arr[i][j];
-                    answer_arr[i][j] = answer_arr[i + 1][j];
-                    answer_arr[i + 1][j] = temp;
-                }
-            }
-
-            for(int j = i+1 ; j > 0 ; j--){
-                if(answer_arr[j][0] == answer_arr[j-1][0] && answer_arr[j-1][1] > answer_arr[j][1]){
-                    int temp = answer_arr[j-1][1];
-                    answer_arr[j-1][1] = answer_arr[j][1];
-                    answer_arr[j][1] = temp;
-                }
-            }
-        */
-
-
-        return answer_arr;
-    }
-
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int row = sc.nextInt();
-        //int[][] answer_arr = new int[row][2];
-
 
         List<coordinate> answer_list = new LinkedList<>();
         for(int i = 0 ; i < row ; i++){
             answer_list.add(new coordinate(sc.nextInt(),sc.nextInt()));
         }
-
-        List<coordinate> result_arr = new coordinateSort().coordinate_sort(answer_list);
-
-       /* for(int i=0; i < row ; i++){
-            for(int j=0 ; j < 2 ; j++){
-                answer_arr[i][j] = sc.nextInt();
-            }
+        Collections.sort(answer_list);
+        for(coordinate cn : answer_list){
+            System.out.println(cn.x + " " + cn.y);
         }
-
-        for(int i = 0 ; i < result_arr.length ; i++){
-            for(int j = 0 ; j < result_arr[0].length ; j++){
-                System.out.print(result_arr[i][j] + " ");
-            }
-            System.out.println();
-        }*/
-
     }
 }
