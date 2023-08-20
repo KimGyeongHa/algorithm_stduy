@@ -16,7 +16,7 @@ public class coordinateSort {
             this.x = x;
             this.y = y;
         }
-        // sort 정렬 메서드 재정의
+        //
         @Override
         public int compareTo(coordinate c) {
             if(c.x == this.x) return this.y - c.y;
